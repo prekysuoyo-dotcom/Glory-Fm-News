@@ -2,97 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title id="page-title">Radio Bayelsa Glory FM 97.1</title>
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Glory FM 97.1 News">
-    
-    <meta property="og:title" id="og-title" content="Radio Bayelsa News Update">
-    <meta property="og:description" id="og-desc" content="Click to read the full story on Glory FM 97.1 Discovery Hub.">
-    <meta property="og:image" id="og-img" content="https://www.radiobayelsa.info/logo.png">
-    <meta property="og:url" id="og-url" content="">
+    <title>Radio Bayelsa Glory FM 97.1</title>
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" id="tw-title" content="Radio Bayelsa News Update">
-    <meta name="twitter:image" id="tw-img" content="https://www.radiobayelsa.info/logo.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Radio Bayelsa Glory FM 97.1">
+    
+    <meta property="og:title" id="dyn-title" content="News Update | Radio Bayelsa">
+    <meta property="og:description" content="Click to read the full story on Glory FM 97.1 News Hub.">
+    <meta property="og:image" id="dyn-img" content="https://www.radiobayelsa.info/logo.png">
+    
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <script>
-        // 1. Get the data from the URL (sent by your NewsHub/Admin)
-        const urlParams = new URLSearchParams(window.location.search);
-        const storyId = urlParams.get('story');
-        const title = urlParams.get('title');
-        const img = urlParams.get('img');
+        // Immediately try to grab data from the URL
+        const params = new URLSearchParams(window.location.search);
+        const storyId = params.get('story');
+        const title = params.get('title');
+        const img = params.get('img');
 
-        // 2. If title and image exist, update the Meta Tags so WhatsApp can see them
+        // Update the tags ASAP for the crawler
         if (title) {
-            const decodedTitle = decodeURIComponent(title);
-            document.title = decodedTitle;
-            document.getElementById('og-title').setAttribute('content', decodedTitle);
-            document.getElementById('tw-title').setAttribute('content', decodedTitle);
+            const cleanTitle = decodeURIComponent(title);
+            document.title = cleanTitle;
+            document.getElementById('dyn-title').setAttribute('content', cleanTitle);
         }
-
         if (img) {
-            const decodedImg = decodeURIComponent(img);
-            document.getElementById('og-img').setAttribute('content', decodedImg);
-            document.getElementById('tw-img').setAttribute('content', decodedImg);
+            const cleanImg = decodeURIComponent(img);
+            document.getElementById('dyn-img').setAttribute('content', cleanImg);
         }
 
-        document.getElementById('og-url').setAttribute('content', window.location.href);
-
-        // 3. REDIRECT LOGIC
-        // This sends the human visitor to your actual Google Site news page
+        // REDIRECT TO YOUR ACTUAL NEWS PAGE
+        // We wait 1 second to give WhatsApp time to "scrape" the page
         setTimeout(function() {
             if (storyId) {
                 window.location.href = "https://www.radiobayelsa.info/news?story=" + storyId;
             } else {
                 window.location.href = "https://www.radiobayelsa.info/news";
             }
-        }, 500); // 500ms delay to ensure crawlers can read the tags
+        }, 800);
     </script>
 
     <style>
-        body {
-            background: #0a0a0a;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
-        .loader {
-            border: 4px solid #333;
-            border-top: 4px solid #bb1919;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        img.logo {
-            width: 120px;
-            margin-bottom: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-        h1 { font-size: 1.2rem; margin: 0; opacity: 0.9; }
-        p { font-size: 0.9rem; opacity: 0.6; margin-top: 10px; }
+        body { background: #000; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
+        .logo { width: 100px; border-radius: 10px; margin-bottom: 20px; }
+        .spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #bb1919; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-
-    <img src="https://www.radiobayelsa.info/logo.png" class="logo" alt="Glory FM Logo">
-    <div class="loader"></div>
-    <h1>GLORY FM 97.1</h1>
-    <p>Loading your news story...</p>
-
+    <div>
+        <img src="https://www.radiobayelsa.info/logo.png" class="logo">
+        <div class="spinner"></div>
+        <p>Loading Glory FM News...</p>
+    </div>
 </body>
 </html>
