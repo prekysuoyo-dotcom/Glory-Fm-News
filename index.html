@@ -1,61 +1,77 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns#">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title id="p-title">Radio Bayelsa Glory FM 97.1</title>
-    <meta property="og:type" content="article">
+    <title>Radio Bayelsa Glory FM 97.1 | News Update</title>
+    <meta property="og:type" content="website">
     <meta property="og:site_name" content="Glory FM 97.1">
-    <meta property="og:title" id="og-title" content="Radio Bayelsa News Update">
-    <meta property="og:description" content="Click to read the full story on Glory FM 97.1 News Hub.">
-    <meta property="og:image" id="og-img" content="https://www.radiobayelsa.info/logo.png">
-    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:title" content="Radio Bayelsa Glory FM 97.1 - Latest News">
+    <meta property="og:description" content="Get the latest news, politics, and sports updates from Bayelsa State and beyond on Glory FM 97.1 Discovery Hub.">
+    
+    <meta property="og:image" content="https://www.radiobayelsa.info/logo.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
     <script>
-        // 1. Parse URL Parameters
+        // Even though the tags are static, the redirect is still smart!
+        // It will still take the user to the correct story on your website.
         const params = new URLSearchParams(window.location.search);
         const storyId = params.get('story');
-        const title = params.get('title');
-        const img = params.get('img');
 
-        // 2. Update Tags Immediately for the WhatsApp Crawler
-        if (title) {
-            const cleanTitle = decodeURIComponent(title);
-            document.title = cleanTitle;
-            document.getElementById('og-title').setAttribute('content', cleanTitle);
-        }
-        
-        if (img) {
-            // If there's a story image, swap the logo for the news image
-            document.getElementById('og-img').setAttribute('content', decodeURIComponent(img));
-        }
-
-        // 3. Human Redirect
-        // We give it a small delay so the bot can finish reading the tags
+        // Redirect after a tiny delay
         setTimeout(function() {
             if (storyId) {
                 window.location.href = "https://www.radiobayelsa.info/news?story=" + storyId;
             } else {
                 window.location.href = "https://www.radiobayelsa.info/news";
             }
-        }, 600);
+        }, 500);
     </script>
 
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
-        .logo { width: 100px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 0 20px rgba(187, 25, 25, 0.5); }
-        .spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #bb1919; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto; }
+        body { 
+            background: #0a0a0a; 
+            color: #fff; 
+            font-family: 'Segoe UI', sans-serif; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            margin: 0; 
+            text-align: center; 
+        }
+        .container {
+            padding: 20px;
+        }
+        .logo { 
+            width: 120px; 
+            border-radius: 20px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 2px solid #bb1919;
+        }
+        .spinner { 
+            border: 3px solid rgba(255,255,255,0.1); 
+            border-top: 3px solid #bb1919; 
+            border-radius: 50%; 
+            width: 30px; 
+            height: 30px; 
+            animation: spin 1s linear infinite; 
+            margin: 0 auto 15px; 
+        }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        h1 { font-size: 1.4rem; margin: 0; letter-spacing: 1px; }
+        p { opacity: 0.6; font-size: 0.9rem; margin-top: 10px; }
     </style>
 </head>
 <body>
-    <div>
+    <div class="container">
         <img src="https://www.radiobayelsa.info/logo.png" class="logo">
         <div class="spinner"></div>
-        <p style="margin-top:20px; letter-spacing:1px; font-size:14px;">LOADING GLORY FM NEWS...</p>
+        <h1>GLORY FM 97.1</h1>
+        <p>Connecting you to the news...</p>
     </div>
 </body>
 </html>
