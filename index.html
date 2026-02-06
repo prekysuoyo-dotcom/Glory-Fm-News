@@ -1,51 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html prefix="og: http://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
-    <title>Radio Bayelsa Glory FM 97.1</title>
-
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Radio Bayelsa Glory FM 97.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta property="og:title" id="dyn-title" content="News Update | Radio Bayelsa">
+    <title id="p-title">Radio Bayelsa Glory FM 97.1</title>
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Glory FM 97.1">
+    <meta property="og:title" id="og-title" content="Radio Bayelsa News Update">
     <meta property="og:description" content="Click to read the full story on Glory FM 97.1 News Hub.">
-    <meta property="og:image" id="dyn-img" content="https://www.radiobayelsa.info/logo.png">
-    
+    <meta property="og:image" id="og-img" content="https://www.radiobayelsa.info/logo.png">
+    <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
     <script>
-        // Immediately try to grab data from the URL
+        // 1. Parse URL Parameters
         const params = new URLSearchParams(window.location.search);
         const storyId = params.get('story');
         const title = params.get('title');
         const img = params.get('img');
 
-        // Update the tags ASAP for the crawler
+        // 2. Update Tags Immediately for the WhatsApp Crawler
         if (title) {
             const cleanTitle = decodeURIComponent(title);
             document.title = cleanTitle;
-            document.getElementById('dyn-title').setAttribute('content', cleanTitle);
+            document.getElementById('og-title').setAttribute('content', cleanTitle);
         }
+        
         if (img) {
-            const cleanImg = decodeURIComponent(img);
-            document.getElementById('dyn-img').setAttribute('content', cleanImg);
+            // If there's a story image, swap the logo for the news image
+            document.getElementById('og-img').setAttribute('content', decodeURIComponent(img));
         }
 
-        // REDIRECT TO YOUR ACTUAL NEWS PAGE
-        // We wait 1 second to give WhatsApp time to "scrape" the page
+        // 3. Human Redirect
+        // We give it a small delay so the bot can finish reading the tags
         setTimeout(function() {
             if (storyId) {
                 window.location.href = "https://www.radiobayelsa.info/news?story=" + storyId;
             } else {
                 window.location.href = "https://www.radiobayelsa.info/news";
             }
-        }, 800);
+        }, 600);
     </script>
 
     <style>
         body { background: #000; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
-        .logo { width: 100px; border-radius: 10px; margin-bottom: 20px; }
+        .logo { width: 100px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 0 20px rgba(187, 25, 25, 0.5); }
         .spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #bb1919; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
@@ -54,7 +55,7 @@
     <div>
         <img src="https://www.radiobayelsa.info/logo.png" class="logo">
         <div class="spinner"></div>
-        <p>Loading Glory FM News...</p>
+        <p style="margin-top:20px; letter-spacing:1px; font-size:14px;">LOADING GLORY FM NEWS...</p>
     </div>
 </body>
 </html>
