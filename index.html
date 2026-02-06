@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title id="meta-title">Radio Bayelsa News</title>
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Glory FM 97.1">
+    <meta property="og:title" id="og-title" content="News Update | Radio Bayelsa">
+    <meta property="og:description" id="og-desc" content="Click to read the full story on Glory FM 97.1 Discovery Hub.">
+    <meta property="og:image" id="og-img" content="https://www.radiobayelsa.info/logo.png">
+    <meta property="og:url" id="og-url" content="">
+
+    <script>
+        // 1. Grab information from the link parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const storyId = urlParams.get('story');
+        const title = urlParams.get('title');
+        const img = urlParams.get('img');
+
+        // 2. Dynamically fill the meta tags for WhatsApp
+        if (title) {
+            const decodedTitle = decodeURIComponent(title);
+            document.getElementById('og-title').setAttribute('content', decodedTitle);
+            document.title = decodedTitle;
+        }
+        if (img) {
+            document.getElementById('og-img').setAttribute('content', decodeURIComponent(img));
+        }
+
+        // 3. THE REDIRECT
+        // This sends the user to your official news page with the story ID attached
+        if (storyId) {
+            const destination = "https://www.radiobayelsa.info/news?story=" + storyId;
+            
+            // Short delay to ensure social crawlers register the data
+            setTimeout(() => {
+                window.location.href = destination;
+            }, 300);
+        } else {
+            // If no story ID, just go to the news home
+            window.location.href = "https://www.radiobayelsa.info/news";
+        }
+    </script>
+</head>
+<body style="background:#0a0a0a; color:white; font-family:sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; margin:0;">
+    <img src="https://www.radiobayelsa.info/logo.png" width="100" style="border-radius:15px; margin-bottom:20px;">
+    <div style="font-weight:bold; font-size:1.2rem;">GLORY FM 97.1</div>
+    <p style="opacity:0.6;">Loading story...</p>
+</body>
+</html>
